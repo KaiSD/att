@@ -17,7 +17,8 @@ Scripts:
 
 ktt_atgcsv.py - generates files from CSV table and ATGv2 template file.
 
-Disclimer:
+
+
 
 I created these scripts for my own needs, but i think they may be usefull to someone else.
 
