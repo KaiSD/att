@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
-Data module for a Kai's Text Tools.
+Data module for a KaiSD Text Tools.
 
 (c) 2013 Ivan "Kai SD" Korystin 
 
@@ -10,7 +10,7 @@ License: GPLv3
 
 import csv, codecs
 
-class Data(object):
+class Data:
     '''
     Empty data class. Can be used for a subclassing or procedural data creation.
     '''
@@ -97,6 +97,9 @@ class Data(object):
                 r.append('')
     
     def col_by_key(self, key):
+        '''
+        Returns a column by header's name
+        '''
         cols = []
         keys = self.keys
         rows = self.rows
@@ -109,6 +112,9 @@ class Data(object):
         return tuple(cols)
     
     def row_by_idx(self, idx):
+        '''
+        Returns a row by index.
+        '''
         return tuple(self.rows[idx])
 
 class CSVData(Data):
@@ -138,6 +144,15 @@ class CSVData(Data):
             return self
     
     def __init__(self, filename, encoding='utf-8', delimiter=';', quotechar='"', **kwargs):
+        '''
+        Constructor.
+        
+        filename - CSV table filename
+        encoding - CSV table encoding
+        delimiter - CSV table delimiter
+        quotechar - CSV table quotechar
+        transpose=True - transpose the table
+        '''
         csvfile = self.Reader(open(filename), encoding=encoding, delimiter=delimiter, quotechar=quotechar)
         sourceData = []
         sourcekeys = None

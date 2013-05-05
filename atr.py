@@ -1,16 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
-Advanced Text Replacer module for a Kai's Text Tools.
+Advanced Text Replacer module for a KaiSD Text Tools.
 
 (c) 2013 Ivan "Kai SD" Korystin 
 
 License: GPLv3
 '''
 import re
-class ATR(object):
+class ATR:
     '''
-    classdocs
+    Advanced Text Replacer - is a class, created to make multiple replacements
+    in the content or names of text file.
+    It can make plain replacements, or use ATG templates to do something more complex.  
     '''
 
     def __init__(self, files):
@@ -160,4 +162,7 @@ class ATR(object):
         self.replacements = []
     
     def log(self, string):
+        '''
+        Print information
+        '''
         pass

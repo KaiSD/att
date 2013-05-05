@@ -1,20 +1,26 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
-Advanced Text Generator module for a Kai's Text Tools.
+Advanced Text Generator module for a KaiSD Text Tools.
 
 (c) 2013 Ivan "Kai SD" Korystin 
 
 License: GPLv3
 '''
-from os.path import join, split, exists
+from os.path import join, exists
 from os import makedirs
 
-class ATG(object):
+class ATG:
     '''
-    Advanced Text Generator is a class, created to generate multiple text files from table data.
+    Advanced Text Generator is a class, created to generate multiple
+    text files from table data.
     '''
     def __init__(self, data, template):
+        '''
+        Constructor.
+        data - an instance of the data.Data class (i.e. CSVData)
+        template - an instance of the template.Template class (i.e. TemplateV2)
+        '''
         self.data = data
         self.template = template
         self.out = template.process(data)
@@ -25,6 +31,9 @@ class ATG(object):
             self.multiple = False
     
     def write_files(self, outputDir='.'):
+        '''
+        Write generated files to the given directory. 
+        '''
         encoding = self.template.encoding
         extension = self.template.extension
         out = self.out
@@ -59,4 +68,7 @@ class ATG(object):
             f.close()
     
     def log(self, text):
+        '''
+        Print information
+        '''
         pass

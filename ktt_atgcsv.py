@@ -3,7 +3,7 @@
 '''
 Generates files from csv table.
 
-Part of Kai's Text Tools
+Part of KaiSD Text Tools
 
 (c) 2013 Ivan "Kai SD" Korystin 
 

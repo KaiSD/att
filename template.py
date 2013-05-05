@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
-Template module for a Kai's Text Tools.
+Template module for a KaiSD Text Tools.
 
 (c) 2013 Ivan "Kai SD" Korystin 
 
@@ -9,20 +9,90 @@ License: GPLv3
 '''
 
 import re
-class TemplateV3(object):
+class Template:
     '''
-    Class for reading ATGv3 templates.
+    Empty template class. Generates empty text.
     '''
-    pass
+    def process(self, data):
+        '''
+        Replace this method in subclasses. 
+        '''
+        return ''
     
-class TemplateV2(object):
+    def warning(self, text):
+        '''
+        Prints a warning
+        '''
+        print text
+    
+    def log(self, text):
+        '''
+        Print information
+        '''
+        pass
+    
+class TemplateV2(Template):
     '''
     Class for reading ATGv2 templates.
+    
+    ATGv2 template file should be a plain text file, starting with the line
+    ATGV2
+    followed by the info line:
+    [$KeyField$Extension$Prefix$Encoding$]
+    where
+    KeyField - is a name of a data column, that contains an identifier.
+    Extension - is the desired extension for the generated files.
+    Prefix - is the desired filename prefix for the generated files
+    Encoding - is the desired encoding for the generated files.
+    The line may also have some optional keywords before the closing bracket:
+    oneFile$ - place all generated text into a single file instead of
+    generating a file for each table row.
+    After the info line, you can put your text.
+    You can use following commands to handle the data:
+    * [$Name$], where Name is the column header,
+    will be replaced with value from the current row.
+    * [$ATGLINDEX$] will be replaced with the number of a current row.
+    * [$ATGHEADER$Text$] and [$ATGFOOTER$Text$] will place the given text
+    at the begining or at the end of the file. You can't use other
+    commands in this text.
+    * [$ATGLIST$Name$Text$], where Name is a multi-column header
+    (i.e. 'Col' will represent 'Col1', 'Col2', 'Col3' etc)
+    will repeat the given text for each non-empty value.
+    You can use other commands in Text. Also [$Name$] inside the list
+    will be replaced with the value for the current row and column.
+    * [$ATGLINDEX$] can be used only inside the ATGLIST text,
+    will be replaced with the current column index.
+    * [$ATGLISTCUT$Name$Text$] - same as ATGLIST, but the last symbol
+    will be removed. Useful for removing unnecessary newlines.
+    * [$ATGIF$Name$Value$Text$] will be replaced with the given text
+    only if the the given column's value is the same as the given one.
+    Will be replaced with the empty text otherwise. You can use other
+    commands in Text.
+    * [$ATGIFNOT$Name$Value$Text$] - same as ATGIF, but the column's value
+    should not be equal to the given one.
+    * [$ATGGREATER$Name$Value$Text$] - same as ATGIF, but the value should
+    be the number and it should be greater then the given one.
+    * [$ATGGREATER$Name$Value$Text$] - same as ATGGREATER, but the value
+    should be less then the given one.
+    * [$ATGREPLACE$Text1$Text2$] - Will replace Text1 with Text2. Replacements
+    will be done after all other commands. You can't use regular expressions or
+    other commands in the text.
+    * [$ATGPREFIX$Text$] - Will add the given text to the filename prefix.
+    You can use other commands in text, but do it carefully.
+    * [$ATGSKIP$] - Skip the current row. Use only in combination with the
+    ATGIF/ATGIFNOT, or you will generate nothing.
+    * [$ATGPREV$Name$], where Name is the column header,
+    will be replaced with the with the value of the given header from the
+    previous row. ATGSKIP will be used for the first row.
     '''
 
     def __init__(self, filename=None, encoding='utf-8', text=''):
         '''
-        Constructor
+        Constructor.
+        
+        filename - name of the ATGv2 template file.
+        encoding - encoding of the template file.
+        text - text to use if no filename has been provided.
         '''
         if filename:
             with open(filename, 'r') as templateFile:
@@ -43,10 +113,6 @@ class TemplateV2(object):
                         self.oneFile = True
                     else:
                         self.oneFile = False
-                    if 'transpose' in keyInfo[4:]:
-                        self.transpose = True
-                    else:
-                        self.transpose = False
                     self.text = u''
                 else:
                     raise BaseException('%s has bad ATGv2 key' % (filename))
@@ -56,7 +122,7 @@ class TemplateV2(object):
         else:
             self.text = text
             
-        self.key = u''
+        self.header = u''
         self.footer = u''
         self.replacement = {}
         self._data = None
@@ -138,12 +204,12 @@ class TemplateV2(object):
         def lIndex(index, flow, keytag, number):
             return flow.replace('[$ATGLINDEX$]', str(number))
         
-        def addkey(index, flow, text):
-            if self.key.find(text) < 0:
-                self.key += text
-            key = '[$ATGkey$' + text + '$]'
+        def addHeader(index, flow, text):
+            if self.header.find(text) < 0:
+                self.header += text
+            key = '[$ATGHEADER$' + text + '$]'
             return flow.replace(key,'')
-        partCommands['ATGkey'] = addkey
+        partCommands['ATGHEADER'] = addHeader
         
         def addFooter(index, flow, text):
             if self.footer.find(text) < 0:
@@ -349,6 +415,9 @@ class TemplateV2(object):
         self.parts = parse(self.text)
     
     def process(self, data):
+        '''
+        Generate text for the given data.
+        '''
         self._data = data
         
         multiWords = {}
@@ -394,26 +463,20 @@ class TemplateV2(object):
                     out += text
                 else:
                     name = self.bonusPrefix + unicode(element)
-                    out[name] = text
+                    out[name] = self.header + text + self.footer
                 self.log('Created %s' % (element))
         
         if self.oneFile:
-            out = self.key + out + self.footer
+            out = self.header + out + self.footer
         
         return out
-    
-    def warning(self, text):
-        print text
-    
-    def log(self, text):
-        pass
     
     @staticmethod
     def express(cls, text, **kwargs):
         obj = cls()
         obj.text = text
-        self.keyField = kwargs.get('keyField', 'Index')
-        self.extension = kwargs.get('extension', '')
-        self.prefix = kwargs.get('prefix', '')
-        self.encoding = kwargs.get('encoding', 'utf-8')
+        obj.keyField = kwargs.get('keyField', 'Index')
+        obj.extension = kwargs.get('extension', '')
+        obj.prefix = kwargs.get('prefix', '')
+        obj.encoding = kwargs.get('encoding', 'utf-8')
         return obj
