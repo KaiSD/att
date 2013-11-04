@@ -10,10 +10,8 @@ Part of KaiSD Text Tools
 License: GPLv3
 '''
 from sys import argv
-from atg import ATG
-from data import CSVData
-from template import TemplateV2
 from os.path import split
+from ktt import ATG, CSVData, TemplateV2
 
 if __name__ == '__main__':
     if len(argv) == 3:
