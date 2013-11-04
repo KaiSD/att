@@ -1,0 +1,162 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module ktt.template</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="ktt.html"><font color="#ffffff">ktt</font></a>.template</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/kaisd/Мастерская/projects/KTT/ktt/template.py">/home/kaisd/Мастерская/projects/KTT/ktt/template.py</a></font></td></tr></table>
+    <p><tt><a href="#Template">Template</a>&nbsp;module&nbsp;for&nbsp;a&nbsp;KaiSD&nbsp;Text&nbsp;Tools.<br>
+&nbsp;<br>
+(c)&nbsp;2013&nbsp;Ivan&nbsp;"Kai&nbsp;SD"&nbsp;Korystin&nbsp;<br>
+&nbsp;<br>
+License:&nbsp;GPLv3</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="ktt.template.html#Template">Template</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="ktt.template.html#TemplateV2">TemplateV2</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Template">class <strong>Template</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Empty&nbsp;template&nbsp;class.&nbsp;Generates&nbsp;empty&nbsp;text.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Template-log"><strong>log</strong></a>(self, text)</dt><dd><tt>Print&nbsp;information</tt></dd></dl>
+
+<dl><dt><a name="Template-process"><strong>process</strong></a>(self, data)</dt><dd><tt>Replace&nbsp;this&nbsp;method&nbsp;in&nbsp;subclasses.</tt></dd></dl>
+
+<dl><dt><a name="Template-warning"><strong>warning</strong></a>(self, text)</dt><dd><tt>Prints&nbsp;a&nbsp;warning</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="TemplateV2">class <strong>TemplateV2</strong></a>(<a href="ktt.template.html#Template">Template</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Class&nbsp;for&nbsp;reading&nbsp;ATGv2&nbsp;templates.<br>
+&nbsp;<br>
+ATGv2&nbsp;template&nbsp;file&nbsp;should&nbsp;be&nbsp;a&nbsp;plain&nbsp;text&nbsp;file,&nbsp;starting&nbsp;with&nbsp;the&nbsp;line<br>
+ATGV2<br>
+followed&nbsp;by&nbsp;the&nbsp;info&nbsp;line:<br>
+[$KeyField$Extension$Prefix$Encoding$]<br>
+where<br>
+KeyField&nbsp;-&nbsp;is&nbsp;a&nbsp;name&nbsp;of&nbsp;a&nbsp;data&nbsp;column,&nbsp;that&nbsp;contains&nbsp;an&nbsp;identifier.<br>
+Extension&nbsp;-&nbsp;is&nbsp;the&nbsp;desired&nbsp;extension&nbsp;for&nbsp;the&nbsp;generated&nbsp;files.<br>
+Prefix&nbsp;-&nbsp;is&nbsp;the&nbsp;desired&nbsp;filename&nbsp;prefix&nbsp;for&nbsp;the&nbsp;generated&nbsp;files<br>
+Encoding&nbsp;-&nbsp;is&nbsp;the&nbsp;desired&nbsp;encoding&nbsp;for&nbsp;the&nbsp;generated&nbsp;files.<br>
+The&nbsp;line&nbsp;may&nbsp;also&nbsp;have&nbsp;some&nbsp;optional&nbsp;keywords&nbsp;before&nbsp;the&nbsp;closing&nbsp;bracket:<br>
+oneFile$&nbsp;-&nbsp;place&nbsp;all&nbsp;generated&nbsp;text&nbsp;into&nbsp;a&nbsp;single&nbsp;file&nbsp;instead&nbsp;of<br>
+generating&nbsp;a&nbsp;file&nbsp;for&nbsp;each&nbsp;table&nbsp;row.<br>
+After&nbsp;the&nbsp;info&nbsp;line,&nbsp;you&nbsp;can&nbsp;put&nbsp;your&nbsp;text.<br>
+You&nbsp;can&nbsp;use&nbsp;following&nbsp;commands&nbsp;to&nbsp;handle&nbsp;the&nbsp;data:<br>
+*&nbsp;[$Name$],&nbsp;where&nbsp;Name&nbsp;is&nbsp;the&nbsp;column&nbsp;header,<br>
+will&nbsp;be&nbsp;replaced&nbsp;with&nbsp;value&nbsp;from&nbsp;the&nbsp;current&nbsp;row.<br>
+*&nbsp;[$ATGLINDEX$]&nbsp;will&nbsp;be&nbsp;replaced&nbsp;with&nbsp;the&nbsp;number&nbsp;of&nbsp;a&nbsp;current&nbsp;row.<br>
+*&nbsp;[$ATGHEADER$Text$]&nbsp;and&nbsp;[$ATGFOOTER$Text$]&nbsp;will&nbsp;place&nbsp;the&nbsp;given&nbsp;text<br>
+at&nbsp;the&nbsp;begining&nbsp;or&nbsp;at&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file.&nbsp;You&nbsp;can't&nbsp;use&nbsp;other<br>
+commands&nbsp;in&nbsp;this&nbsp;text.<br>
+*&nbsp;[$ATGLIST$Name$Text$],&nbsp;where&nbsp;Name&nbsp;is&nbsp;a&nbsp;multi-column&nbsp;header<br>
+(i.e.&nbsp;'Col'&nbsp;will&nbsp;represent&nbsp;'Col1',&nbsp;'Col2',&nbsp;'Col3'&nbsp;etc)<br>
+will&nbsp;repeat&nbsp;the&nbsp;given&nbsp;text&nbsp;for&nbsp;each&nbsp;non-empty&nbsp;value.<br>
+You&nbsp;can&nbsp;use&nbsp;other&nbsp;commands&nbsp;in&nbsp;Text.&nbsp;Also&nbsp;[$Name$]&nbsp;inside&nbsp;the&nbsp;list<br>
+will&nbsp;be&nbsp;replaced&nbsp;with&nbsp;the&nbsp;value&nbsp;for&nbsp;the&nbsp;current&nbsp;row&nbsp;and&nbsp;column.<br>
+*&nbsp;[$ATGLINDEX$]&nbsp;can&nbsp;be&nbsp;used&nbsp;only&nbsp;inside&nbsp;the&nbsp;ATGLIST&nbsp;text,<br>
+will&nbsp;be&nbsp;replaced&nbsp;with&nbsp;the&nbsp;current&nbsp;column&nbsp;index.<br>
+*&nbsp;[$ATGLISTCUT$Name$Text$]&nbsp;-&nbsp;same&nbsp;as&nbsp;ATGLIST,&nbsp;but&nbsp;the&nbsp;last&nbsp;symbol<br>
+will&nbsp;be&nbsp;removed.&nbsp;Useful&nbsp;for&nbsp;removing&nbsp;unnecessary&nbsp;newlines.<br>
+*&nbsp;[$ATGIF$Name$Value$Text$]&nbsp;will&nbsp;be&nbsp;replaced&nbsp;with&nbsp;the&nbsp;given&nbsp;text<br>
+only&nbsp;if&nbsp;the&nbsp;the&nbsp;given&nbsp;column's&nbsp;value&nbsp;is&nbsp;the&nbsp;same&nbsp;as&nbsp;the&nbsp;given&nbsp;one.<br>
+Will&nbsp;be&nbsp;replaced&nbsp;with&nbsp;the&nbsp;empty&nbsp;text&nbsp;otherwise.&nbsp;You&nbsp;can&nbsp;use&nbsp;other<br>
+commands&nbsp;in&nbsp;Text.<br>
+*&nbsp;[$ATGIFNOT$Name$Value$Text$]&nbsp;-&nbsp;same&nbsp;as&nbsp;ATGIF,&nbsp;but&nbsp;the&nbsp;column's&nbsp;value<br>
+should&nbsp;not&nbsp;be&nbsp;equal&nbsp;to&nbsp;the&nbsp;given&nbsp;one.<br>
+*&nbsp;[$ATGGREATER$Name$Value$Text$]&nbsp;-&nbsp;same&nbsp;as&nbsp;ATGIF,&nbsp;but&nbsp;the&nbsp;value&nbsp;should<br>
+be&nbsp;the&nbsp;number&nbsp;and&nbsp;it&nbsp;should&nbsp;be&nbsp;greater&nbsp;then&nbsp;the&nbsp;given&nbsp;one.<br>
+*&nbsp;[$ATGGREATER$Name$Value$Text$]&nbsp;-&nbsp;same&nbsp;as&nbsp;ATGGREATER,&nbsp;but&nbsp;the&nbsp;value<br>
+should&nbsp;be&nbsp;less&nbsp;then&nbsp;the&nbsp;given&nbsp;one.<br>
+*&nbsp;[$ATGREPLACE$Text1$Text2$]&nbsp;-&nbsp;Will&nbsp;replace&nbsp;Text1&nbsp;with&nbsp;Text2.&nbsp;Replacements<br>
+will&nbsp;be&nbsp;done&nbsp;after&nbsp;all&nbsp;other&nbsp;commands.&nbsp;You&nbsp;can't&nbsp;use&nbsp;regular&nbsp;expressions&nbsp;or<br>
+other&nbsp;commands&nbsp;in&nbsp;the&nbsp;text.<br>
+*&nbsp;[$ATGPREFIX$Text$]&nbsp;-&nbsp;Will&nbsp;add&nbsp;the&nbsp;given&nbsp;text&nbsp;to&nbsp;the&nbsp;filename&nbsp;prefix.<br>
+You&nbsp;can&nbsp;use&nbsp;other&nbsp;commands&nbsp;in&nbsp;text,&nbsp;but&nbsp;do&nbsp;it&nbsp;carefully.<br>
+*&nbsp;[$ATGSKIP$]&nbsp;-&nbsp;Skip&nbsp;the&nbsp;current&nbsp;row.&nbsp;Use&nbsp;only&nbsp;in&nbsp;combination&nbsp;with&nbsp;the<br>
+ATGIF/ATGIFNOT,&nbsp;or&nbsp;you&nbsp;will&nbsp;generate&nbsp;nothing.<br>
+*&nbsp;[$ATGPREV$Name$],&nbsp;where&nbsp;Name&nbsp;is&nbsp;the&nbsp;column&nbsp;header,<br>
+will&nbsp;be&nbsp;replaced&nbsp;with&nbsp;the&nbsp;with&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;given&nbsp;header&nbsp;from&nbsp;the<br>
+previous&nbsp;row.&nbsp;ATGSKIP&nbsp;will&nbsp;be&nbsp;used&nbsp;for&nbsp;the&nbsp;first&nbsp;row.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="ktt.template.html#TemplateV2">TemplateV2</a></dd>
+<dd><a href="ktt.template.html#Template">Template</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="TemplateV2-__init__"><strong>__init__</strong></a>(self, filename<font color="#909090">=None</font>, encoding<font color="#909090">='utf-8'</font>, text<font color="#909090">=''</font>)</dt><dd><tt>Constructor.<br>
+&nbsp;<br>
+filename&nbsp;-&nbsp;name&nbsp;of&nbsp;the&nbsp;ATGv2&nbsp;template&nbsp;file.<br>
+encoding&nbsp;-&nbsp;encoding&nbsp;of&nbsp;the&nbsp;template&nbsp;file.<br>
+text&nbsp;-&nbsp;text&nbsp;to&nbsp;use&nbsp;if&nbsp;no&nbsp;filename&nbsp;has&nbsp;been&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="TemplateV2-process"><strong>process</strong></a>(self, data)</dt><dd><tt>Generate&nbsp;text&nbsp;for&nbsp;the&nbsp;given&nbsp;data.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="TemplateV2-express"><strong>express</strong></a>(cls, text, **kwargs)</dt></dl>
+
+<hr>
+Methods inherited from <a href="ktt.template.html#Template">Template</a>:<br>
+<dl><dt><a name="TemplateV2-log"><strong>log</strong></a>(self, text)</dt><dd><tt>Print&nbsp;information</tt></dd></dl>
+
+<dl><dt><a name="TemplateV2-warning"><strong>warning</strong></a>(self, text)</dt><dd><tt>Prints&nbsp;a&nbsp;warning</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="ktt.template.html#Template">Template</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
