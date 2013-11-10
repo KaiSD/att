@@ -34,6 +34,3 @@ nosetests.xml
 .project
 .pydevproject
 
-GoogleIssues2CSV.py
-Mantis.xml
-MantisXML.txt
