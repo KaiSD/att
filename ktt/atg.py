@@ -53,7 +53,7 @@ class ATG(object):
                 self.log('   Saved %s' % (name+'.'+extension))
                 f.close()
         else:
-            name = self.template.bonusPrefix + '.' + extension
+            name = self.template.bonusPrefix
             if name == '.':
                 name = self.template.keyField
             namepath = name.replace('\\', '/').split('/')
@@ -71,4 +71,5 @@ class ATG(object):
         '''
         Print information
         '''
+        #print 'ATG:', text
         pass

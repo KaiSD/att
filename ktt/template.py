@@ -29,6 +29,7 @@ class Template(object):
         '''
         Print information
         '''
+        #print 'Template:', text
         pass
     
 class TemplateV2(Template):
