@@ -4,7 +4,7 @@ set OUTDIR=docs
 
 cd ..
 
-for %%I in (atg atr data template) do (
+for %%I in (att, att.atg, att.atr, att.template, att.data) do (
 %PYDOC% -w %%I
 move %%I.html %OUTDIR%
 )

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
-Advanced Text Generator module for a KaiSD Text Tools.
+Automatic Text Generator module for a Automatic Text Tools.
 
 (c) 2013 Ivan "Kai SD" Korystin 
 
@@ -12,7 +12,7 @@ from os import makedirs
 
 class ATG(object):
     '''
-    Advanced Text Generator is a class, created to generate multiple
+    Automatic Text Generator is a class, created to generate multiple
     text files from table data.
     '''
     def __init__(self, data, template):
@@ -30,6 +30,16 @@ class ATG(object):
         else:
             self.multiple = False
     
+	def join_filename(self, path, name, extension):
+		'''
+		Returns a file name for given path, name and extension.
+		'''
+		if extension:
+			return join(unicode(path),name+'.'+extension)
+		else:
+			return join(unicode(path),name)
+		
+	
     def write_files(self, outputDir='.'):
         '''
         Write generated files to the given directory. 
@@ -43,14 +53,14 @@ class ATG(object):
                 newpath = u''
                 for i in namepath[:-1]:
                     newpath = join(newpath, i)
-                if not exists(join(unicode(outputDir),newpath)):
-                    makedirs(join(unicode(outputDir),newpath))
-                fname = join(unicode(outputDir),name+'.'+extension)
+                if not exists(join(unicode(outputDir), newpath)):
+                    makedirs(join(unicode(outputDir), newpath))
+                fname = self.join_filename(outputDir, name, extension)
                 if fname.endswith('.'):
                     fname = fname[:-1]
                 f = open(fname, 'w')
                 f.write(out[name].encode(encoding))
-                self.log('   Saved %s' % (name+'.'+extension))
+                self.log('   Saved %s' % fname)
                 f.close()
         else:
             name = self.template.bonusPrefix
@@ -62,9 +72,10 @@ class ATG(object):
                 newpath = join(newpath, i)
             if not exists(join(unicode(outputDir),newpath)):
                 makedirs(join(unicode(outputDir),newpath))
-            f = open(join(unicode(outputDir),name+'.'+extension), 'w')
+			fname = self.join_filename(outputDir, name, extension)
+            f = open(fname, 'w')
             f.write(out.encode(encoding))
-            self.log('   Saved %s' % (name+'.'+extension))
+            self.log('   Saved %s' % fname)
             f.close()
     
     def log(self, text):

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 '''
-Data module for a KaiSD Text Tools.
+Data module for a Automatic Text Tools.
 
 (c) 2013 Ivan "Kai SD" Korystin 
 
