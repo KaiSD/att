@@ -1,7 +1,7 @@
-ktt
+ATT
 ===
 
-Kai's text tools
+Automatic Text Tools
 
 I created these scripts for my own needs, but i think they may be usefull to someone else.
 
@@ -19,4 +19,4 @@ data - data class for ATG and ATR.
 
 Scripts:
 
-ktt_atgcsv.py - generates files from CSV table and ATGv2 template file.
+atgcsv.py - generates files from CSV table and ATGv2 template file.
