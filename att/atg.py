@@ -30,15 +30,14 @@ class ATG(object):
         else:
             self.multiple = False
     
-	def join_filename(self, path, name, extension):
-		'''
-		Returns a file name for given path, name and extension.
-		'''
-		if extension:
-			return join(unicode(path),name+'.'+extension)
-		else:
-			return join(unicode(path),name)
-		
+    def join_filename(self, path, name, extension):
+        '''
+        Returns a file name for given path, name and extension.
+        '''
+        if extension:
+            return join(unicode(path),name+'.'+extension)
+        else:
+            return join(unicode(path),name)
 	
     def write_files(self, outputDir='.'):
         '''
@@ -72,7 +71,7 @@ class ATG(object):
                 newpath = join(newpath, i)
             if not exists(join(unicode(outputDir),newpath)):
                 makedirs(join(unicode(outputDir),newpath))
-			fname = self.join_filename(outputDir, name, extension)
+            fname = self.join_filename(outputDir, name, extension)
             f = open(fname, 'w')
             f.write(out.encode(encoding))
             self.log('   Saved %s' % fname)

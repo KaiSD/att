@@ -12,7 +12,7 @@ License: GPLv3
 '''
 from sys import argv
 from os.path import split
-from ktt import ATG, CSVData, TemplateV2
+from att import ATG, CSVData, TemplateV2
 
 if __name__ == '__main__':
     if len(argv) == 3:
