@@ -23,4 +23,4 @@ if __name__ == '__main__':
         generator.write_files(argv[3])
     else:
         print 'Usage:', split(argv[0])[-1], '<CSV file>', '<Template file>', '[Output directory]'
-        print '(c)2013 Ivan "Kai SD" Korystin' 
+        print '(c)2015 Ivan "Kai SD" Korystin' 
