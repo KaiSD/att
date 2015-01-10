@@ -217,7 +217,7 @@ class CSVData(Data):
             for row in rows:
                 self.writerow(row)
     
-    def __init__(self, file, encoding='utf-8', delimiter=';', quotechar='"', **kwargs):
+    def __init__(self, file, encoding='utf-8', delimiter=',', quotechar='"', **kwargs):
         '''
         Constructor.
         
@@ -226,13 +226,14 @@ class CSVData(Data):
         delimiter - CSV table delimiter (default: ;)
         quotechar - CSV table quotechar (default: ")
         '''
+        f = None
         if file:
             if type(file) == str:
-                with open(file) as f:
-                    csvfile = self.Reader(f, encoding=encoding, delimiter=delimiter, quotechar=quotechar)
+                f = open(file)
+                csvfile = self.Reader(f, encoding=encoding, delimiter=delimiter, quotechar=quotechar)
             else:
                 csvfile = self.Reader(file, encoding=encoding, delimiter=delimiter, quotechar=quotechar)
-            
+
             source_data = []
             source_keys = None;
             
@@ -252,6 +253,8 @@ class CSVData(Data):
             
             self.keys = source_keys
             self.rows = source_data
+            if not f is None:
+                f.close();
         else:
             super(CSVData, self).__init__()
     
