@@ -53,6 +53,8 @@ class TemplateV2(Template):
     * [$Name$], where Name is the column header,
     will be replaced with value from the current row.
     * [$ATGLINDEX$] will be replaced with the number of a current row.
+	* [$ATGESCAPE$name$] , where Name is the column header,
+	will be replaced with value from the current row, quotes and line endings will be escaped.
     * [$ATGHEADER$Text$] and [$ATGFOOTER$Text$] will place the given text
     at the begining or at the end of the file. You can't use other
     commands in this text.
@@ -195,7 +197,7 @@ class TemplateV2(Template):
                 return flow
             return flow.replace('[$%s$]' % (keytag), unicode(self._data[keytag, index]))
         partCommands['_ATGPLAIN'] = plain
-        
+		
         def nPlain(index, flow, keytag, number):
             if not keytag+str(number) in self._data.keys:
                 self.warning('WARNING: keyword not found in table - %s' % (keytag+str(number)))
@@ -219,6 +221,18 @@ class TemplateV2(Template):
             return flow.replace(key,'')
         partCommands['ATGFOOTER'] = addFooter
         
+        def addEscape(index, flow, keytag):
+            if not keytag in self._data.keys:
+                self.warning('WARNING: keyword not found in table - %s' % (keytag))
+                return flow
+            string = unicode(self._data[keytag, index])
+            string = string.replace('\n', '\\n')
+            string = string.replace('"', '\\"')
+            string = string.replace('\\', '\\\\')
+            string = string.replace('\'', '\\\'')
+            return flow.replace('[$ATGESCAPE$%s$]' % (keytag), string)
+        partCommands['ATGESCAPE'] = addEscape
+		
         def addList(index, flow, string):
             key = '[$ATGLIST$%s$%s$]' % (string.split('$')[0], string[len(string.split('$')[0])+1:])
             sub = string[len(string.split('$')[0])+1:]
